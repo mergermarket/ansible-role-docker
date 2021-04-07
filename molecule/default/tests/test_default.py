@@ -18,7 +18,7 @@ def test_docker_package_installed(host):
 
 
 def test_docker_pip_package_installed(host):
-    packages = host.pip_package.get_packages()
+    packages = host.pip.get_packages()
     assert 'docker' in packages
 
 

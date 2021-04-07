@@ -1,48 +1,29 @@
 ---
+# tasks file for docker
+- name: Molecule Hello World!
+  debug:
+    msg: Hello, World!
+
 
 - name: Install Packages
   package:
     name:
       - python
       - python-setuptools
-    state: latest
-
-- name: Install Docker with Yum
-  package:
-    name:
-      - docker
-    state: latest
-  when: ansible_kernel is not search("amzn2")
 
 - name: Install Docker with amazon-linux-extras
   command: "amazon-linux-extras install docker"
-  become: yes
-  when: ansible_kernel is search("amzn2")
+  register: extrasinstall
+  changed_when: "'already installed and latest version\nNothing to do' not in extrasinstall.stdout"
+
 
 - name: Update with latest packages
   yum:
     name: "*"
-    state: latest
-  when: ansible_kernel is search("amzn2")
 
 - name: Install Pip
-  easy_install:
-    name: pip
-    state: latest
-  when: ansible_distribution == 'CentOS'
-
-- name: Download and Install Pip
-  block:
-    - name: Download Pip
-      get_url:
-        url: https://bootstrap.pypa.io/get-pip.py
-        dest: /tmp/get-pip.py
-    - name: Install Pip
-      command: "python /tmp/get-pip.py"
-      args:
-        creates: /usr/bin/pip
-  become: true
-  when: ansible_distribution == "Amazon"
+  yum:
+    name: python-pip
 
 - name: docker config
   lineinfile:
@@ -62,7 +43,6 @@
     src: docker_housekeeping.sh
     dest: /usr/local/bin
     mode: 0755
-
 - name: python docker
   pip:
     name: docker
