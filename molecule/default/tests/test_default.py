@@ -13,9 +13,12 @@ def test_hosts_file(host):
     assert f.group == 'root'
 
 
-def test_docker_package_installed(host):
-    assert host.package('docker').is_installed
+# def test_docker_package_installed(host):
+#     assert host.package('docker').is_installed
 
+def test_docker_package_installed(host):
+    f = host.file('/bin/docker')
+    assert f.exists
 
 def test_docker_pip_package_installed(host):
     packages = host.pip.get_packages()
