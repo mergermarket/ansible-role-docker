@@ -8,10 +8,10 @@
       - unzip
       - tar
 
-# - name: Install Docker with amazon-linux-extras
-#   command: "amazon-linux-extras install docker"
-#   register: extrasinstall
-#   changed_when: "'already installed and latest version\nNothing to do' not in extrasinstall.stdout"
+- name: Install Docker with amazon-linux-extras
+  command: "amazon-linux-extras install docker"
+  register: extrasinstall
+  changed_when: "'already installed and latest version\nNothing to do' not in extrasinstall.stdout"
 
 - name: Extract docker-20.10.5.tgz into /tmp
   unarchive:
@@ -36,19 +36,12 @@
   yum:
     name: python-pip
 
-# - name: docker config
-#   lineinfile:
-#     path: /etc/sysconfig/docker
-#     line: 'OPTIONS="--log-driver=json-file --log-opt max-size=50m --log-opt max-file=1 --default-ulimit nofile=4096:65535 --bip=172.17.42.1/16 --mtu=9001"'
-#     regexp: '^OPTIONS'
-#     state: present
-
-
 - name: docker config
-  copy:
-    src: docker-config
-    dest: /etc/sysconfig/docker
-    mode: 0644
+  lineinfile:
+    path: /etc/sysconfig/docker
+    line: 'OPTIONS="--log-driver=json-file --log-opt max-size=50m --log-opt max-file=1 --default-ulimit nofile=4096:65535 --bip=172.17.42.1/16 --mtu=9001"'
+    regexp: '^OPTIONS'
+    state: present
 
 - name: dangling volumes cron
   copy:
