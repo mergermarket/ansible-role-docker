@@ -58,3 +58,4 @@
 - name: python docker
   pip:
     name: docker
+    extra_args: --ignore-installed
