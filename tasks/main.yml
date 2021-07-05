@@ -7,6 +7,7 @@
       - gzip
       - unzip
       - tar
+      - git
 
 - name: Install Docker with amazon-linux-extras
   command: "amazon-linux-extras install docker"
@@ -67,3 +68,22 @@
   pip:
     name: docker
     extra_args: --ignore-installed
+
+- name: ansible create directory example
+  file:
+    path: /home/jenkins/.docker/cli-plugins
+    state: directory
+
+- name: install buildx x86
+  when: ansible_facts['architecture'] == "x86_64"
+  get_url:
+    url: https://github.com/docker/buildx/releases/download/v0.5.1/buildx-v0.5.1.linux-amd64
+    dest: /home/jenkins/.docker/cli-plugins/buildx
+    mode: 0755
+
+- name: install buildx arn
+  when: ansible_facts['architecture'] == "x86_64"
+  get_url:
+    url: https://github.com/docker/buildx/releases/download/v0.5.1/buildx-v0.5.1.linux-arm-v7
+    dest: /home/jenkins/.docker/cli-plugins/buildx
+    mode: 0755
