@@ -47,7 +47,3 @@ def test_docker_config_written(host):
 def test_docker_cron_exists(host):
     f = host.file('/etc/cron.hourly/docker-gc-dangling-volumes.sh')
     assert f.exists
-
-def test_docker_cron_exists(host):
-    f = host.file('/home/root/.docker/cli-plugins/docker-buildx')
-    assert f.exists
