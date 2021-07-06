@@ -78,12 +78,12 @@
   when: ansible_facts['architecture'] == "x86_64"
   get_url:
     url: https://github.com/docker/buildx/releases/download/v0.5.1/buildx-v0.5.1.linux-amd64
-    dest: /home/jenkins/.docker/cli-plugins/buildx
+    dest: /home/jenkins/.docker/cli-plugins/docker-buildx
     mode: 0755
 
 - name: install buildx arn
   when: ansible_facts['architecture'] == "x86_64"
   get_url:
     url: https://github.com/docker/buildx/releases/download/v0.5.1/buildx-v0.5.1.linux-arm-v7
-    dest: /home/jenkins/.docker/cli-plugins/buildx
+    dest: /home/jenkins/.docker/cli-plugins/docker-buildx
     mode: 0755
