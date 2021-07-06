@@ -49,5 +49,5 @@ def test_docker_cron_exists(host):
     assert f.exists
 
 def test_docker_cron_exists(host):
-    f = host.file('/home/jenkins/.docker/cli-plugins/buildx')
+    f = host.file('/home/jenkins/.docker/cli-plugins/docker-buildx')
     assert f.exists
