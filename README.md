@@ -1,8 +1,6 @@
 Docker
 =========
 
-[![Build Status](https://travis-ci.com/mergermarket/ansible-role-docker.svg?branch=master)](https://travis-ci.com/mergermarket/ansible-role-docker)
-
 ![Deploy to Ansible Galaxy](https://github.com/mergermarket/ansible-role-docker/actions/workflows/deploy.yaml/badge.svg)
 
 
