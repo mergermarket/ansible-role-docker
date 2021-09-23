@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   role_name: docker
-  author: Platform Team
+  author: mergermarket
   description: Ansible Role that configures Docker
   company: Acuris/Mergermarket
 
