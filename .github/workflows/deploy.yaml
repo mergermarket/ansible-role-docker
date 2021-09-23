@@ -1,3 +1,4 @@
+---
 name: Deploy to Ansible Galaxy
 on:
   workflow_dispatch:
