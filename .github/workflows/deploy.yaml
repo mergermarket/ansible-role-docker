@@ -25,3 +25,4 @@ jobs:
             flake8
             yamllint
       - run: ansible --version
+      - run: molecule test
