@@ -1,6 +1,6 @@
 ---
 - name: Install Packages
-  package:
+  ansible.builtin.package:
     name:
       - python
       - python-setuptools
@@ -10,7 +10,7 @@
       - git
 
 - name: Install Docker with amazon-linux-extras
-  command: "amazon-linux-extras install docker"
+  ansible.builtin.command: "amazon-linux-extras install docker"
   register: extrasinstall
   changed_when: "'already installed and latest version\nNothing to do' not in extrasinstall.stdout"
 
@@ -38,33 +38,33 @@
 #     remote_src: yes
 
 - name: Update with latest packages
-  yum:
+  ansible.builtin.yum:
     name: "*"
 
 - name: Install Pip
-  yum:
+  ansible.builtin.yum:
     name: python-pip
 
-- name: docker config
-  lineinfile:
+- name: Docker config
+  ansible.builtin.lineinfile:
     path: /etc/sysconfig/docker
     line: 'OPTIONS="--log-driver=json-file --log-opt max-size=50m --log-opt max-file=1 --default-ulimit nofile=4096:65535 --bip=172.17.42.1/16 --mtu=9001"'
     regexp: '^OPTIONS'
     state: present
 
-- name: dangling volumes cron
-  copy:
+- name: Dangling volumes cron
+  ansible.builtin.copy:
     src: docker-gc-dangling-volumes.sh
     dest: /etc/cron.hourly/
     mode: 0755
 
-- name: housekeeping
-  copy:
+- name: Housekeeping
+  ansible.builtin.copy:
     src: docker_housekeeping.sh
     dest: /usr/local/bin
     mode: 0755
 
-- name: python docker
-  pip:
+- name: Python docker
+  ansible.builtin.pip:
     name: docker
     extra_args: --ignore-installed
