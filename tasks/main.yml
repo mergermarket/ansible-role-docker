@@ -1,6 +1,6 @@
 ---
 - name: Install Packages
-  ansible.builtin.package:
+  ansible.builtin.dnf:
     name:
       - python
       - python-setuptools
@@ -9,10 +9,10 @@
       - tar
       - git
 
-- name: Install Docker with amazon-linux-extras
-  ansible.builtin.command: "amazon-linux-extras install docker"
-  register: extrasinstall
-  changed_when: "'already installed and latest version\nNothing to do' not in extrasinstall.stdout"
+# - name: Install Docker with amazon-linux-extras
+#   ansible.builtin.command: "amazon-linux-extras install docker"
+#   register: extrasinstall
+#   changed_when: "'already installed and latest version\nNothing to do' not in extrasinstall.stdout"
 
 # - name: Extract docker-20.10.5.tgz into /tmp for x86_64
 #   when: ansible_facts['architecture'] == "x86_64"
@@ -37,12 +37,16 @@
 #     mode: 0755
 #     remote_src: yes
 
-- name: Update with latest packages
-  ansible.builtin.yum:
-    name: "*"
+- name: Install docker
+  ansible.builtin.dnf:
+    name: "docker"
+
+# - name: Update with latest packages
+#   ansible.builtin.dnf:
+#     name: "*"
 
 - name: Install Pip
-  ansible.builtin.yum:
+  ansible.builtin.dnf:
     name: python-pip
 
 - name: Docker config
