@@ -72,3 +72,9 @@
   ansible.builtin.pip:
     name: docker
     extra_args: --ignore-installed
+
+- name: Restart Docker
+  ansible.builtin.service:
+    name: docker
+    state: restarted
+    enabled: yes
