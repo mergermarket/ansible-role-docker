@@ -48,7 +48,7 @@
 - name: Docker config
   ansible.builtin.lineinfile:
     path: /etc/sysconfig/docker
-    line: 'OPTIONS="--log-driver=json-file --log-opt max-size=50m --log-opt max-file=1 --default-ulimit nofile=4096:65535 --bip=172.17.42.1/16 --mtu=9001"'
+    line: 'OPTIONS="--log-driver=json-file --log-opt max-size=50m --log-opt max-file=1 --default-ulimit nofile=8192:65535 --bip=172.17.42.1/16 --mtu=9001"'
     regexp: '^OPTIONS'
     state: present
 
