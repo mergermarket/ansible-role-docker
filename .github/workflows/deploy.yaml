@@ -9,7 +9,7 @@ on:
 jobs:
   publish:
     name: Test and publish
-    runs-on: 'ubuntu-latest'
+    runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v2
@@ -28,4 +28,4 @@ jobs:
       - run: ansible --version
       - run: printf '[defaults]\nroles_path=../' >ansible.cfg
       - run: ./test.sh
-      - run: ansible-galaxy role import --token ${{ secrets.ANSIBLE_GALAXY_TOKEN }}  mergermarket docker
+      - run: ansible-galaxy role import --token ${{ secrets.ANSIBLE_GALAXY_TOKEN }}  mergermarket ${{ github.event.repository.name }}
