@@ -9,7 +9,7 @@ on:
 jobs:
   publish:
     name: Test and publish
-    runs-on: [self-hosted,Linux,aws]
+    runs-on: [self-hosted, linux]
     if: ${{ github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v2
