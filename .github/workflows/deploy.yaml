@@ -9,10 +9,11 @@ on:
 jobs:
   publish:
     name: Test and publish
-    runs-on: ['self-hosted', 'Linux', 'aws']
+    runs-on: 'ubuntu-latest'
     if: ${{ github.ref == 'refs/heads/main' }}
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setupwget@v1
       - uses: actions/setup-python@v1
       - uses: BSFishy/pip-action@v1
         with:
