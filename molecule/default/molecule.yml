@@ -20,7 +20,7 @@ scenario:
     - create
     - converge
     # # - idempotence
-    # - lint
+    - lint
     - verify
 verifier:
   name: testinfra

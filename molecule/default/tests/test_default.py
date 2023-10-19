@@ -13,8 +13,8 @@ def test_hosts_file(host):
     assert f.group == 'root'
 
 
-# def test_docker_package_installed(host):
-#     assert host.package('docker').is_installed
+def test_docker_package_installed(host):
+    assert host.package('docker').is_installed
 
 def test_docker_package_installed(host):
     f = host.file('/bin/docker')
@@ -36,7 +36,7 @@ def test_docker_config_written(host):
         '--log-opt max-size=50m '
         '--log-opt max-file=1 '
         '--default-ulimit '
-        'nofile=4096:65535 '
+        'nofile=8192:65535 '
         '--bip=172.17.42.1/16 '
         '--mtu=9001"'
     )
